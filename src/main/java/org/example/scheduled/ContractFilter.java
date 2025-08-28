@@ -37,7 +37,7 @@ public class ContractFilter {
         }
 
         if (!validDay) {
-            log.debug("合约号天数不符合要求: {},天数{}", contract.getContractNo(),contract.getTotalODDays());
+            log.debug("合约号天数不符合天数要求: {},天数{}", contract.getContractNo(),contract.getTotalODDays());
         }
 
         return valid && validDay;
