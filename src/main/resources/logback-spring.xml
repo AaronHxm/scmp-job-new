@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- 定义日志文件输出目录为项目根目录下的log文件夹 -->
+    <property name="LOG_PATH" value="./log"/>
+    <property name="APP_NAME" value="myapp"/>
+
+    <!-- 每次启动生成唯一的时间戳 -->
+    <timestamp key="startupTimestamp" datePattern="yyyyMMddHHmmss"/>
+
+    <!-- 控制台输出 -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 每次启动生成新的日志文件 -->
+    <appender name="FILE-STARTUP" class="ch.qos.logback.core.FileAppender">
+        <file>${LOG_PATH}/${APP_NAME}-${startupTimestamp}.log</file>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+        </encoder>
+        <append>false</append> <!-- 不追加，每次都新建 -->
+    </appender>
+
+    <!-- 每日滚动日志 -->
+    <appender name="FILE-DAILY" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/${APP_NAME}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/${APP_NAME}-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE-STARTUP"/>
+        <appender-ref ref="FILE-DAILY"/>
+    </root>
+</configuration>
