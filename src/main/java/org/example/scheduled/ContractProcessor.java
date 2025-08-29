@@ -34,7 +34,7 @@ public class ContractProcessor {
     @Autowired
     private CaseGrabService caseGrabService;
 
-    private int SLEEP_TIME = 850;
+    private int SLEEP_TIME = 800;
 
     // 每个账号单独的串行执行器
     private final ConcurrentHashMap<String, ExecutorService> accountExecutors = new ConcurrentHashMap<>();
