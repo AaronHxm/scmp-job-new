@@ -2,19 +2,15 @@ package org.example.scheduled;
 
 import com.google.common.util.concurrent.RateLimiter;
 import lombok.extern.slf4j.Slf4j;
-import org.checkerframework.checker.units.qual.C;
 import org.example.scheduled.module.ContractInfo;
 import org.example.scheduled.module.ProcessResult;
 import org.example.scheduled.service.CaseGrabService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicLong;
-import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -118,11 +114,8 @@ public class ContractProcessor {
                             // 有数据：处理合约
                             ProcessResult result = processContractWithRetry(contract);
 
-                            log.info("User {} processed contract {}: success={}, attempts={}",
-                                    userId, contract.getContractNo(), result.isSuccess(), result.getAttempts());
-
                             // 成功后严格休眠500ms，确保每秒最多2次
-                            Thread.sleep(1000);
+                            Thread.sleep(800);
                         } else {
                             // 无数据：空转休眠，避免CPU占用过高
                             Thread.sleep(100);

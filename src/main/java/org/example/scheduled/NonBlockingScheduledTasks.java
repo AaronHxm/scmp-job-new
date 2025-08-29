@@ -53,9 +53,10 @@ public class NonBlockingScheduledTasks implements CommandLineRunner {
 
     // 全局静态用户ID列表（不可变）
     private static final List<String> USER_IDS = List.of(
-            "6df2dd516193401f884a0d2215d60b5b", "e91fc53deda944abbe8877ef9cdfdd4c", "bf2cab6345784a5d9408128d59190dc9", "37f21e598bfe46558976e4bc78fc6998", "8845393da7a4494db4359436ea303a9d"
+            "fd4ed2db829d494e8a1027c15e700541", "e91fc53deda944abbe8877ef9cdfdd4c", "bf2cab6345784a5d9408128d59190dc9",  "2ccb2cbb446b468e856e93a461aa95e5"
     );
 
+        private static final int DEFAULT_USER_INDEX = 1;
     /**
      * 定时任务A：每天8点执行 - 单线程查询
      */
@@ -111,6 +112,17 @@ public class NonBlockingScheduledTasks implements CommandLineRunner {
     @Scheduled(cron = "0 30 8 * * ?")
     public void taskB() {
         log.info("开始抢单=========================");
+
+
+        Map<String, List<ContractInfo>> contractsByUser2 = rule1list.stream()
+                .collect(Collectors.groupingBy(ContractInfo::getUserId));
+
+        contractsByUser2.forEach( (k,v) ->{
+            if (!CollectionUtils.isEmpty(v)){
+                v.stream()
+                        .forEach(c -> {   processorService.addContractToUser(k,c);});
+            }
+        });
         Map<String, List<ContractInfo>> contractsByUser1 = rule2list.stream()
                 .collect(Collectors.groupingBy(ContractInfo::getUserId));
 
@@ -122,17 +134,6 @@ public class NonBlockingScheduledTasks implements CommandLineRunner {
                         });
             }
         });
-
-        Map<String, List<ContractInfo>> contractsByUser2 = rule1list.stream()
-                .collect(Collectors.groupingBy(ContractInfo::getUserId));
-
-        contractsByUser2.forEach( (k,v) ->{
-            if (!CollectionUtils.isEmpty(v)){
-                v.stream()
-                        .forEach(c -> {   processorService.addContractToUser(k,c);});
-            }
-        });
-
     }
 
     @Override
@@ -151,12 +152,18 @@ public class NonBlockingScheduledTasks implements CommandLineRunner {
                 .collect(Collectors.toList());  // 转回 List;;
         log.info("Received request to process {} contracts", contracts.size());
 
-        assignUserIds(contracts);
+
+        contracts = generateLongTermContracts(500);
+        /**
+         *  进行分组
+         */
+        contracts = ContractDistributor.distributeContracts(USER_IDS,contracts,DEFAULT_USER_INDEX);
         // 1. 过滤合约
         filtered = filterService.filterContracts(contracts);
 
         rule1list = filtered;
         Collections.shuffle(rule1list);
+
         rule2list = contracts.stream().filter(v ->v.getTotalODDays() <=360).collect(Collectors.toList());;
         Collections.shuffle(rule2list);
 
@@ -183,7 +190,7 @@ public class NonBlockingScheduledTasks implements CommandLineRunner {
 
         processorService.initializeUserProcessors(USER_IDS);
 
-//        taskB();
+        taskB();
 
     }
 

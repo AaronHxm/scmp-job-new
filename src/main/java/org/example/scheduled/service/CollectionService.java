@@ -127,7 +127,7 @@ public class CollectionService {
         // 构建请求体
         String requestBody = String.format(
                 "{\"pageIndex\":%d,\"pageSize\":%d,\"dcaStatus\":\"%s\",\"dcaType\":\"%s\",\"orderAsc\":\"%s\",\"orderColumn\":\"%s\"}",
-                CollectionServiceConstants.PAGE_INDEX,
+                pageIndex,
                 CollectionServiceConstants.PAGE_SIZE,
                 CollectionServiceConstants.DCA_STATUS,
                 CollectionServiceConstants.DCA_TYPE,
