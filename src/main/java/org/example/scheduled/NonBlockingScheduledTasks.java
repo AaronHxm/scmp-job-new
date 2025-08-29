@@ -53,7 +53,7 @@ public class NonBlockingScheduledTasks implements CommandLineRunner {
 
     // 全局静态用户ID列表（不可变）
     private static final List<String> USER_IDS = List.of(
-            "f3606a10fbdf4300a205a8f7cb8de5b9", "90fe047d1b3349429580bc269a9d69ef", "cc16e78e644f493892b8e01116af5148", "e5ad4587f916487c9c6c0f4ca5c02528", "d3bbba6762764bc4ac32899a0f957f85"
+            "6df2dd516193401f884a0d2215d60b5b", "e91fc53deda944abbe8877ef9cdfdd4c", "bf2cab6345784a5d9408128d59190dc9", "37f21e598bfe46558976e4bc78fc6998", "8845393da7a4494db4359436ea303a9d"
     );
 
     /**
@@ -156,9 +156,9 @@ public class NonBlockingScheduledTasks implements CommandLineRunner {
         filtered = filterService.filterContracts(contracts);
 
         rule1list = filtered;
-
+        Collections.shuffle(rule1list);
         rule2list = contracts.stream().filter(v ->v.getTotalODDays() <=360).collect(Collectors.toList());;
-
+        Collections.shuffle(rule2list);
 
         long start = System.currentTimeMillis();
         log.info("原始数据=========120到360,ABT===========================");
@@ -183,7 +183,7 @@ public class NonBlockingScheduledTasks implements CommandLineRunner {
 
         processorService.initializeUserProcessors(USER_IDS);
 
-        taskB();
+//        taskB();
 
     }
 
