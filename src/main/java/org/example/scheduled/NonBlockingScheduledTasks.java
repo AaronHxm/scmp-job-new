@@ -56,7 +56,7 @@ public class NonBlockingScheduledTasks implements CommandLineRunner {
             "fd4ed2db829d494e8a1027c15e700541", "e91fc53deda944abbe8877ef9cdfdd4c", "bf2cab6345784a5d9408128d59190dc9",  "2ccb2cbb446b468e856e93a461aa95e5"
     );
 
-        private static final int DEFAULT_USER_INDEX = 1;
+    private static final int DEFAULT_USER_INDEX = 5;
     /**
      * 定时任务A：每天8点执行 - 单线程查询
      */
@@ -154,6 +154,7 @@ public class NonBlockingScheduledTasks implements CommandLineRunner {
 
 
         contracts = generateLongTermContracts(500);
+        log.info("[TaskA] 查询完成， ，获取{}条数据",  contracts.size());
         /**
          *  进行分组
          */
@@ -181,10 +182,10 @@ public class NonBlockingScheduledTasks implements CommandLineRunner {
             log.info("合同编号：【{}】,姓名:【{}】,天数：【{}】", v.getContractNo(), v.getCustomerName(), v.getTotalODDays());
 
         });
-        System.out.printf("[TaskA] 查询完成，120到160,ABT，耗时%dms，获取%d条数据%n",
+        log.info("[TaskA] 查询完成，120到160,ABT，耗时{}ms，获取{}条数据",
                 System.currentTimeMillis() - start, rule1list.size());
 
-        System.out.printf("[TaskA] 查询完成，360,耗时%dms，获取%d条数据%n",
+        log.info("[TaskA] 查询完成，360,耗时{}ms，获取{}条数据",
                 System.currentTimeMillis() - start, rule2list.size());
 
 
