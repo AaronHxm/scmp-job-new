@@ -34,7 +34,7 @@ public class ContractProcessor {
     @Autowired
     private CaseGrabService caseGrabService;
 
-
+    private int SLEEP_TIME = 850;
 
     // 每个账号单独的串行执行器
     private final ConcurrentHashMap<String, ExecutorService> accountExecutors = new ConcurrentHashMap<>();
@@ -115,7 +115,7 @@ public class ContractProcessor {
                             ProcessResult result = processContractWithRetry(contract);
 
                             // 成功后严格休眠500ms，确保每秒最多2次
-                            Thread.sleep(800);
+                            Thread.sleep(SLEEP_TIME);
                         } else {
                             // 无数据：空转休眠，避免CPU占用过高
                             Thread.sleep(100);
@@ -198,7 +198,7 @@ public class ContractProcessor {
 
                 // 重试等待
                 if (attempts < MAX_RETRIES) {
-                    Thread.sleep(500);
+                    Thread.sleep(SLEEP_TIME);
                     addContractToUser(contract.getUserId(), contract);
                 }
 
