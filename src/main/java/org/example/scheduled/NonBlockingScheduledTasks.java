@@ -191,7 +191,7 @@ public class NonBlockingScheduledTasks implements CommandLineRunner {
 
         processorService.initializeUserProcessors(USER_IDS);
 
-        taskB();
+//        taskB();
 
     }
 
