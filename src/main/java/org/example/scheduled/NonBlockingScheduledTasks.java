@@ -53,10 +53,10 @@ public class NonBlockingScheduledTasks implements CommandLineRunner {
 
     // 全局静态用户ID列表（不可变）
     private static final List<String> USER_IDS = List.of(
-            "fd4ed2db829d494e8a1027c15e700541", "e91fc53deda944abbe8877ef9cdfdd4c", "bf2cab6345784a5d9408128d59190dc9",  "2ccb2cbb446b468e856e93a461aa95e5"
+            "11986136513346e5aa7c2a6b5966669e", "6b31bcfe91624d119914fe076da117b7", "e625d2b2912548e2a9ef5be0adbdd2c6",  "30db87b2d3cd4204a00b5c93bb03cd13"
     );
 
-    private static final int DEFAULT_USER_INDEX = 5;
+    private static final int DEFAULT_USER_INDEX = 1;
     /**
      * 定时任务A：每天8点执行 - 单线程查询
      */
@@ -153,7 +153,7 @@ public class NonBlockingScheduledTasks implements CommandLineRunner {
         log.info("Received request to process {} contracts", contracts.size());
 
 
-        contracts = generateLongTermContracts(500);
+
         log.info("[TaskA] 查询完成， ，获取{}条数据",  contracts.size());
         /**
          *  进行分组
