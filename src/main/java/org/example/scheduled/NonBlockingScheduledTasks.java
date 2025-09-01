@@ -53,7 +53,7 @@ public class NonBlockingScheduledTasks implements CommandLineRunner {
 
     // 全局静态用户ID列表（不可变）
     private static final List<String> USER_IDS = List.of(
-            "de6c0a327f03409a8724a2ab328832d6", "079b112fda9c4b85af5c790d8458b7f3", "d61771cf626d430383a3047b63698db9",  "47d9e96b9c684650b3411e04419f73ff"
+            "4cc2bc07d74548cf833bfd7d3a4f6bda", "c2637de2a21f46aa8fd413c40c49bdd9", "ec142a95e8304193b52425801870e574",  "05a7232c34b0490eaab436a30ceecb37"
     );
 
     private static final int DEFAULT_USER_INDEX = 1;
@@ -152,7 +152,7 @@ public class NonBlockingScheduledTasks implements CommandLineRunner {
                 .collect(Collectors.toList());  // 转回 List;;
         log.info("Received request to process {} contracts", contracts.size());
 
-
+        contracts = contracts.stream().filter(v ->v.getTotalODDays() <=360).collect(Collectors.toList());;
 
         log.info("[TaskA] 查询完成， ，获取{}条数据",  contracts.size());
         /**
