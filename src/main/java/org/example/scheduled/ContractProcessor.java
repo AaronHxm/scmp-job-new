@@ -319,7 +319,7 @@ public class ContractProcessor {
     private boolean isSuccessResponse(String response) {
         // 这里根据实际业务逻辑实现
         // 示例：假设返回的JSON中包含 success:true 表示成功
-        return ! (response.contains("抢单失败") || response.contains("亲，同一时间抢单次数过多"));
+        return  response.contains("受理") ;
     }
 
     private ProcessResult buildSuccessResult(ContractInfo contract, String response, int attempts) {
