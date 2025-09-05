@@ -84,6 +84,13 @@ public class CollectionService {
 
 
     public QueryResponse<ContractInfo> fetchPreGrabCases(int pageIndex) {
+
+
+        return fetchPreGrabCases(pageIndex,CollectionServiceConstants.AUTH_TOKEN);
+
+    }
+
+    public QueryResponse<ContractInfo> fetchPreGrabCases(int pageIndex,String token) {
         // 构建请求URL
         String url = CollectionServiceConstants.BASE_URL +
                 "/gateway/collectionservice/dfcw/outSrc/preGrabCaseList" +
@@ -95,21 +102,11 @@ public class CollectionService {
 
         // 构建请求头
         HttpHeaders headers = new HttpHeaders();
-//        headers.setAccept(List.of(MediaType.TEXT_PLAIN)); // 明确接受text/plain
-////        headers.set("Accept-Charset", "ISO-8859-1");
-//        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-//        headers.set("Authorization", CollectionServiceConstants.AUTH_TOKEN);
-//        headers.set("clientId", CollectionServiceConstants.CLIENT_ID);
-////        headers.set("lang", CollectionServiceConstants.LANG);
-//        headers.set("User-Agent", CollectionServiceConstants.USER_AGENT);
-////        headers.set("noncestr", CollectionServiceConstants.NONCESTR);
-//        headers.set("sign", CollectionServiceConstants.SIGN);
-//        headers.set("timestamp", String.valueOf(CollectionServiceConstants.TIMESTAMP));
 ////        headers.set("Cookie", "user-code=" + CollectionServiceConstants.USER_CODE_COOKIE);
 
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setAccept(List.of(MediaType.ALL));
-        headers.set("Authorization",CollectionServiceConstants.AUTH_TOKEN);
+        headers.set("Authorization",token);
         headers.set("Expires", "0");
         headers.set("Pragma", "no-cache");
         headers.set("clientId", "mplanyou");
