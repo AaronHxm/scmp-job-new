@@ -196,7 +196,7 @@ public class ContractProcessor2 {
     private boolean isSuccessResponse(String response) {
         // 这里根据实际业务逻辑实现
         // 示例：假设返回的JSON中包含 success:true 表示成功
-        return  response.contains("受理");
+        return  response.contains("受理") || response.contains("不存在");
     }
 
     private ProcessResult buildSuccessResult(ContractInfo contract, String response, int attempts) {
