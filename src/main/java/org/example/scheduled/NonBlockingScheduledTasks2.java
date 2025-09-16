@@ -66,7 +66,7 @@ public class NonBlockingScheduledTasks2 implements CommandLineRunner {
 
     // 全局静态用户ID列表（不可变）
     private static final List<String> USER_IDS = List.of(
-            "1aca0637a4774f14a8b6f16cf85642b3", "f154bcb4663e492fb2eff13e4e260c3f", "676b91276b0244c19c901b33cbef8a4a",  "1b84d25bec0e4509b4e8ed8030339b8c"
+            "285d3f67613b4b87848891034900895e", "75718ff2b985416ca978d39dd0820e87", "3f5fd2d0768b4eed9fb713479e0739e7",  "34c6ce1e02e148e5953eee7b2dc5a3cb"
     );
 
     private static final int DEFAULT_USER_INDEX = 1;
