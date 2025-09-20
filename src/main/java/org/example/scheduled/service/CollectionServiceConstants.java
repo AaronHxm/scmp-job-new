@@ -5,7 +5,7 @@ public class CollectionServiceConstants {
     public static final String BASE_URL = "https://csmp.df-finance.com.cn";
 
     // 固定Header值
-    public static final String AUTH_TOKEN = "6ce67440540046dca058332861b6e48a";
+    public static final String AUTH_TOKEN = "42dd30dc6cf042e183e302b16bfb2b3b";
     public static final String CLIENT_ID = "mplanyou";
     public static final String LANG = "ZH_CN";
     public static final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36";
