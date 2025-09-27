@@ -123,9 +123,9 @@ public class NonBlockingScheduledTasks2 implements CommandLineRunner {
 
     }
 
-    @Override
-    public void run(String... args) throws Exception {
-
+    @Scheduled(cron = "0 10 8 * * ?")
+    public void taskB(){
+        log.info("定时任务开始");
         QueryResponse<ContractInfo> listResponse = collectionService.fetchAllPreGrabCases();
 
         List<ContractInfo> contracts = listResponse.getRows().stream()
@@ -177,8 +177,14 @@ public class NonBlockingScheduledTasks2 implements CommandLineRunner {
 
         log.info("[TaskA] 查询完成，360,耗时{}ms，获取{}条数据",
                 System.currentTimeMillis() - start, rule2list.size());
+    }
+
+    @Override
+    public void run(String... args) throws Exception {
 
 
+
+        log.info("服务启动");
 
 
 //        taskA();
