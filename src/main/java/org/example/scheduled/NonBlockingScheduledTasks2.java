@@ -6,6 +6,7 @@ import org.example.scheduled.module.ContractInfo;
 import org.example.scheduled.module.ProcessResult;
 import org.example.scheduled.module.QueryResponse;
 import org.example.scheduled.service.CollectionService;
+import org.example.scheduled.service.CollectionServiceConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -66,7 +67,10 @@ public class NonBlockingScheduledTasks2 implements CommandLineRunner {
 
     // 全局静态用户ID列表（不可变）
     private static final List<String> USER_IDS = List.of(
-            "4ba7ee0486ed481faea107372aa0c8d4", "4ba7ee0486ed481faea107372aa0c8d4", "4ba7ee0486ed481faea107372aa0c8d4",  "4ba7ee0486ed481faea107372aa0c8d4"
+            CollectionServiceConstants.AUTH_TOKEN,
+            CollectionServiceConstants.AUTH_TOKEN,
+            CollectionServiceConstants.AUTH_TOKEN,
+            CollectionServiceConstants.AUTH_TOKEN
     );
 
     private static final int DEFAULT_USER_INDEX = 1;
