@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class ContractProcessor2 {
 
-    private static final int MAX_RETRIES = 300;
+    private static final int MAX_RETRIES = 500;
 
     @Autowired
     private CaseGrabService caseGrabService;
