@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class ContractProcessor2 {
 
-    private static final int MAX_RETRIES = 500;
+    private static final int MAX_RETRIES = 1000;
 
     @Autowired
     private CaseGrabService caseGrabService;
@@ -27,7 +27,7 @@ public class ContractProcessor2 {
     @Autowired
     private Executor contractProcessorExecutor;
 
-    private static final int MAX_REQUESTS_PER_SECOND = 300;
+    private static final int MAX_REQUESTS_PER_SECOND = 1000;
 
     private final RateLimiter rateLimiter = RateLimiter.create(MAX_REQUESTS_PER_SECOND);
     private final ExecutorService sendExecutor = Executors.newFixedThreadPool(MAX_REQUESTS_PER_SECOND);
